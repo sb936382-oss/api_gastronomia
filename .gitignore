@@ -1,0 +1,12 @@
+# Credenciales: nunca se suben a GitHub
+.env
+
+# Entornos virtuales y archivos compilados
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editores
+.vscode/
+.idea/

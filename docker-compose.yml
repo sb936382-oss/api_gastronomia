@@ -1,0 +1,21 @@
+# MongoDB 7: única base de datos de la API Gastronomía.
+# Las contraseñas de root se leen del archivo .env (no se suben a GitHub).
+# Los scripts de la carpeta database/ se ejecutan solos la PRIMERA vez que se crea el volumen.
+services:
+  mongo:
+    image: mongo:7
+    container_name: k_mongo_gastronomia
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      TZ: America/Bogota
+    ports:
+      - "27017:27017"
+    volumes:
+      - k_mongo_datos:/data/db
+      - ./database/01_mongo_estructura.js:/docker-entrypoint-initdb.d/01_mongo_estructura.js:ro
+      - ./database/02_mongo_datos_prueba.js:/docker-entrypoint-initdb.d/02_mongo_datos_prueba.js:ro
+
+volumes:
+  k_mongo_datos:
